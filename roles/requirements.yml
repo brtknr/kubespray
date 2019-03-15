@@ -1,0 +1,5 @@
+---
+- name: jasmin.cluster-infra
+  src: https://github.com/cedadev/jasmin-cluster-infra-ansible
+  version: master
+...

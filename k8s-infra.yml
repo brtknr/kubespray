@@ -1,0 +1,34 @@
+---
+#####
+## Playbook that provisions and then configures a Kubernetes
+## cluster on OpenStack
+#####
+
+# Do the configuration
+- import_playbook: discover-gateway-ip.yml
+- import_playbook: os-keystone-trust.yml
+
+# Provision the cluster infrastructure
+- hosts: openstack
+  vars_files:
+    - vars/kube-masters-with-fip.yml
+    - vars/kube-workers.yml
+  roles:
+    - role: jasmin.cluster-infra
+      cluster_groups:
+        - "{{ cluster_masters }}"
+        - "{{ cluster_workers }}"
+
+- hosts: k8s-cluster
+  tasks:
+    - name: Disable filewalld
+      service:
+        name: firewalld
+        enabled: no
+        state: stopped
+      become: yes
+
+- import_playbook: cluster.yml
+  vars:
+    openstack_trust_id: "{{ hostvars[groups['openstack'] | first]['openstack_trust_id'] }}"
+    ansible_become: yes
