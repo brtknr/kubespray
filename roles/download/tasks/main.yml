@@ -79,7 +79,3 @@
     - group_names | intersect(download.groups) | length
     - not (inventory_hostname == download_delegate)
 
-- include_tasks: ../../container-engine/containerd/tasks/crictl.yml
-  when:
-    - container_manager in ['containerd']
-    - not skip_downloads|default(false)
