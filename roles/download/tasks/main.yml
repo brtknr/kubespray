@@ -78,4 +78,3 @@
     - download_run_once
     - group_names | intersect(download.groups) | length
     - not (inventory_hostname == download_delegate)
-
