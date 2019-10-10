@@ -39,6 +39,7 @@ cat inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml
 # installing packages and interacting with various systemd daemons.
 # Without --become the playbook will fail to run!
 ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml
+ansible-playbook -i inventory/kata/inventory.ini -i ~/p3-appliances/ansible/inventory-kata --vault-password-file=~/p3-appliances/vault-password --become cluster.yml
 ```
 
 Note: When Ansible is already installed via system packages on the control machine, other python packages installed via `sudo pip install -r requirements.txt` will go to a different directory tree (e.g. `/usr/local/lib/python2.7/dist-packages` on Ubuntu) from Ansible's (e.g. `/usr/lib/python2.7/dist-packages/ansible` still on Ubuntu).
