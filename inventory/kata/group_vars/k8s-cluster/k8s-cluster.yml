@@ -225,7 +225,7 @@ podsecuritypolicy_enabled: false
 # Make a copy of kubeconfig on the host that runs Ansible in {{ inventory_dir }}/artifacts
 # kubeconfig_localhost: false
 # Download kubectl onto the host that runs Ansible in {{ bin_dir }}
-# kubectl_localhost: false
+kubectl_localhost: false
 
 
 #  Enable creation of QoS cgroup hierarchy, if true top level QoS and pod cgroups are created. (default true)
